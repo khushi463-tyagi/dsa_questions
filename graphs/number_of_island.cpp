@@ -32,6 +32,30 @@ public:
             dfs(nx,ny);
         }
     }
+    void bfs(int a,int b){
+        queue<pair<int,int>>pq;
+        pq.push({a,b});
+        adj[a][b]=0;
+        while (!pq.empty())
+        {
+            auto f=pq.front();
+            int i=f.first;
+            int j=f.second;
+            pq.pop();
+            vector<int>dx={0,1,0,-1};
+            vector<int>dy={1,0,-1,0};
+            for(int k=0;k<4;k++){
+                int nx = i+dx[k];
+                int ny= j+dy[k];
+                if(nx>=0 && ny>=0 && nx<m && ny<n && adj[nx][ny]==1)
+                {
+                    pq.push({nx, ny});
+                    adj[nx][ny]=0;
+                }
+            }
+        }
+        
+    }
 
 };
 
@@ -51,10 +75,6 @@ int main(){
         cin>>i>>j;
         g.addedge(i,j);
     }
-    for(int i=0;i<m;i++){
-        for(int j=0;j<n;j++){
-            cout<<g.get(i,j);
-        }
         
     }
     int cnt=0;
@@ -62,7 +82,8 @@ int main(){
         for(int b=0;b<n;b++){
             if(g.get(a,b)==1){
                 cnt++;
-                g.dfs(a,b);
+               // g.dfs(a,b);
+               g.bfs(a,b);
             }
         }
     }
