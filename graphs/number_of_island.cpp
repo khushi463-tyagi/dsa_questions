@@ -76,7 +76,7 @@ int main(){
         g.addedge(i,j);
     }
         
-    }
+    
     int cnt=0;
     for(int a=0;a<m;a++){
         for(int b=0;b<n;b++){
